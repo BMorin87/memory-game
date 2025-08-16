@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import '../styles/App.css'
 import Scoreboard from './Scoreboard'
+import Card from './Card'
+import DataFetcher from './DataFetcher'
+
+const fetcher = new DataFetcher();
+const data = await fetcher.GetEuropeanDogIDs();
+const promises = data.objectIDs.map(id => 
+  fetcher.GetPaintingObject(id)
+)
+const results = await Promise.all(promises);
+console.log(results);
 
 function App() {
   const [score, setScore] = useState(0)
@@ -14,7 +24,9 @@ function App() {
         <Scoreboard score={score} bestScore={bestScore} />
       </div>
       <div className="card-container">
-
+        {/*{cardData.map((card) => (
+          <Card key={card.id} cardData={card} />
+        ))}*/}
       </div>
     </>
   )
