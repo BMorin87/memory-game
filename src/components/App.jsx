@@ -5,12 +5,15 @@ import Card from './Card'
 import DataFetcher from './DataFetcher'
 
 const fetcher = new DataFetcher();
-const data = await fetcher.GetEuropeanDogIDs();
-const promises = data.objectIDs.map(id => 
-  fetcher.GetPaintingObject(id)
-)
+const fetchedData = await fetcher.GetEuropeanDogIDs();
+const promises = fetchedData.objectIDs.map(id => fetcher.GetPaintingObject(id));
 const results = await Promise.all(promises);
-console.log(results);
+const cardData = results.filter(painting => painting.primaryImage).map(painting => {
+  return {
+    image: painting.primaryImage,
+    name: painting.artistDisplayName
+  }
+});
 
 function App() {
   const [score, setScore] = useState(0)
@@ -24,9 +27,9 @@ function App() {
         <Scoreboard score={score} bestScore={bestScore} />
       </div>
       <div className="card-container">
-        {/*{cardData.map((card) => (
-          <Card key={card.id} cardData={card} />
-        ))}*/}
+        {cardData.map((cardData, index) => (
+          <Card key={index} cardData={cardData} />
+        ))}
       </div>
     </>
   )

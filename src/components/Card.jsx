@@ -1,3 +1,5 @@
+import '../styles/Card.css'
+
 function Card({ cardData }) {
     return (
         <div className="card">
