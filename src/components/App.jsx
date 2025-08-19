@@ -14,8 +14,8 @@ const cardData = await (async () => {
     // Remove any additional names in parentheses.
     const cleanedArtistName = painting.artistDisplayName.replace(/\s*\(.*\)/, '').trim();
     return {
-      image: painting.primaryImage,
       id: index,
+      image: painting.primaryImage,
       name: cleanedArtistName
     }
   });
@@ -31,8 +31,26 @@ function App() {
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useState(0)
   const [displayedCards, setDisplayedCards] = useState(() => getShuffledCards(cardData));
+  const [clickedCardIDs, setClickedCardIDs] = useState([]);
 
-  const handleCardClick = () => {
+  const updateScore = (card) => {
+    if (clickedCardIDs.includes(card.id)) {
+      setScore(0);
+      setClickedCardIDs([]);
+    } else {
+      setScore(prevScore => {
+        const newScore = prevScore + 1;
+        if (newScore > bestScore) {
+          setBestScore(newScore);
+        }
+        return newScore;
+      })
+      setClickedCardIDs(prevIDs => [...prevIDs, card.id]);
+    }
+  }
+
+  const handleCardClick = (clickedCard) => {
+    updateScore(clickedCard);
     const newShuffledCards = getShuffledCards(cardData);
     setDisplayedCards(newShuffledCards);
   } 
@@ -46,7 +64,10 @@ function App() {
       </div>
       <div className="card-container">
         {displayedCards.map((cardData) => (
-          <Card key={cardData.id} cardData={cardData} onClick={handleCardClick} />
+          <Card
+            key={cardData.id}
+            cardData={cardData}
+            onClick={() => handleCardClick(cardData)} />
         ))}
       </div>
     </>
