@@ -1,6 +1,31 @@
-.card-container {
+body {
+  background-color: #f0f0f0;
+}
+
+.header {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  color: #000000;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+.scoreboard {
+  background-color: #1a324b;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: #e0e0e0;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  padding: 20px;
 }

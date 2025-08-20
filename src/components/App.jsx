@@ -58,8 +58,10 @@ function App() {
   return (
     <>
       <div className="header">
-        <h1>Memory Game</h1>
-        <p>Get points by clicking a painting but don't click any more than once!</p>
+        <div>
+          <h1>Memory Game</h1>
+          <p>Get points by clicking a painting but don't click any more than once!</p>
+        </div>
         <Scoreboard score={score} bestScore={bestScore} />
       </div>
       <div className="card-container">

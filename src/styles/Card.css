@@ -1,6 +1,35 @@
+.card {
+  padding: 15px;
+  background-color: #1a324b;
+  border-radius: 8px;
+  
+  border: 10px solid;
+  border-top-color: #c9b037;
+  border-left-color: #c9b037;
+  border-right-color: #a48c2c;
+  border-bottom-color: #a48c2c;
+  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
 .card img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 100%; /* Makes the image fill the frame */
+  height: 250px;
+  object-fit: contain;
+  display: block; /* Removes any default spacing below the image */
+}
+
+.card p {
+  text-align: center;
+  margin: 10px 0 0;
+  font-family: sans-serif;
+  color: #e0e0e0;
 }
